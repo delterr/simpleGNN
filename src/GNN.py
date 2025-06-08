@@ -78,10 +78,11 @@ G.add_edge(0, 3)
 G.add_edge(1, 3)
 G.add_edge(2, 3)
 
-print(G)
-print("=" * 20)
-print(G.node_values)
-for i in range(10000):
-    G.update()
-print("=" * 20)
-print(G.node_values)
+if __name__ == "__main__":
+    print(G)
+    print("=" * 20)
+    print(G.node_values)
+    for i in range(10000):
+        G.update()
+    print("=" * 20)
+    print(G.node_values)
