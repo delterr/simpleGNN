@@ -82,7 +82,7 @@ if __name__ == "__main__":
     print(G)
     print("=" * 20)
     print(G.node_values)
-    for i in range(10000):
+    for i in range(4):
         G.update()
     print("=" * 20)
     print(G.node_values)
