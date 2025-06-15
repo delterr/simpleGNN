@@ -20,10 +20,10 @@ class GNN(Graph):
         super().remove_edge(u, v)
     
     def transform(self, x, i):
-        return self.weight_matrix[i] * x# arbitrary affine transformation
+        return self.weight_matrix[i] * x
     
     def aggregate(self, node):
-        aggregated_value = np.zeros((1, 3), dtype=np.float64)  # Initialize with a random vector
+        aggregated_value = np.zeros((1, 3), dtype=np.float64)  # Initialize with zero vector
         
         for i, row in enumerate(self.adj_matrix):
             if isinstance(row[node], int):
