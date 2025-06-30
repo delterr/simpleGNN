@@ -1,10 +1,4 @@
-from activations import sigmoid
-
-import math
-import random
-import numpy as np
 import networkx as nx
-import matplotlib.pyplot as plt
 
 class Graph:
     def __init__(self, node_values=None):
