@@ -6,8 +6,8 @@ import networkx as nx
 import matplotlib.pyplot as plt
 
 class GNN(Graph):
-    def __init__(self, node_values):
-        super().__init__(node_values)
+    def __init__(self, node_values, directed=False):
+        super().__init__(node_values, directed)
         self.target_nodes = [node for node in range(self.num_nodes)] # Node IDs e.g [0 1 2 3 4 ...]
         
     def add_edge(self, u, v):
@@ -25,14 +25,15 @@ class GNN(Graph):
             for j, val in enumerate(row):
                 if val == 1:
                     self.node_values[i] += temp_node_values[j]
-            self.node_values[i] -= 1
+            if not self.directed:
+                self.node_values[i] -= 1
                     
         return self.node_values
             
     def __repr__(self):
         return super().__repr__()
 
-G = GNN(node_values=[1, 1, 1, 1, 1, 1, 1])
+G = GNN(node_values=[1, 1, 1, 1, 1, 1, 1], directed=False)
 
 G.add_edge(0, 1)
 G.add_edge(0, 2)
@@ -40,6 +41,7 @@ G.add_edge(2, 3)
 G.add_edge(2, 4)
 G.add_edge(1, 5)
 G.add_edge(1, 6)
+
 
 if __name__ == "__main__":
     print(G)

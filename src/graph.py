@@ -1,11 +1,16 @@
 import networkx as nx
 
 class Graph:
-    def __init__(self, node_values=None):
+    def __init__(self, node_values=None, directed=False):
         self.num_nodes = len(node_values) if node_values is not None else 0
         self.node_values = node_values
+        self.directed = directed
         self.adj_matrix = [[0] * self.num_nodes for _ in range(self.num_nodes)]
-        self.g_disp = nx.Graph()
+        
+        if self.directed:
+            self.g_disp = nx.DiGraph()
+        else:
+            self.g_disp = nx.Graph()
         
         for i in range(self.num_nodes):
             for j in range(self.num_nodes):
@@ -13,8 +18,12 @@ class Graph:
                     self.adj_matrix[i][j] = "X"
     
     def add_edge(self, u, v):
-        self.adj_matrix[u][v] = 1
-        self.adj_matrix[v][u] = 1
+        if self.directed:
+            self.adj_matrix[u][v] = "X"
+            self.adj_matrix[v][u] = 1
+        else:
+            self.adj_matrix[u][v] = 1
+            self.adj_matrix[v][u] = 1
         self.g_disp.add_edge(u, v)
     
     def remove_edge(self, u, v):
