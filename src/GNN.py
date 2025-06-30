@@ -50,12 +50,23 @@ if __name__ == "__main__":
         print(A)
     print("=" * 20)
     
+    color_map = []
+    for node in G.node_values:
+        if node == 1:
+            color_map.append('blue')
+        elif node == 2:
+            color_map.append('green')
+        elif node == 3:
+            color_map.append('red')
+        else:
+            color_map.append('gray')
+    
     label_dict = {}
     
     for i in range(len(G.node_values)):
         label_dict[i] = G.node_values[i]
     
-    nx.draw(G.g_disp, labels=label_dict, with_labels=True, font_weight='bold')
+    nx.draw(G.g_disp, node_color=color_map, labels=label_dict, with_labels=True, font_weight='bold')
 
     plt.show()
             
