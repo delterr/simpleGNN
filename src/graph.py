@@ -20,10 +20,9 @@ class Graph:
     def add_edge(self, u, v):
         if self.directed:
             self.adj_matrix[u][v] = "X"
-            self.adj_matrix[v][u] = 1
         else:
             self.adj_matrix[u][v] = 1
-            self.adj_matrix[v][u] = 1
+        self.adj_matrix[v][u] = 1
         self.g_disp.add_edge(u, v)
     
     def remove_edge(self, u, v):

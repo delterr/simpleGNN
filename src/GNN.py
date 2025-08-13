@@ -22,16 +22,14 @@ class GNN(Graph):
         for i, row in enumerate(self.adj_matrix):
             for j, val in enumerate(row):
                 if val == 1:
-                    self.node_values[i] += temp_node_values[j]
-            if not self.directed:
-                self.node_values[i] -= 1
-                    
+                    self.node_values[i] = self.node_values[i] + temp_node_values[j]
+        self.node_values = [hash(i) for i in self.node_values]  # Hashing the node values
         return self.node_values
             
     def __repr__(self):
         return super().__repr__()
 
-G = GNN(node_values=[1, 1, 1, 1, 1, 1, 1], directed=False)
+G = GNN(node_values=[(1,), (1,), (1,), (1,), (1,), (1,), (1,)], directed=True)
 
 G.add_edge(0, 1)
 G.add_edge(0, 2)
@@ -45,6 +43,7 @@ if __name__ == "__main__":
     print(G)
     print("=" * 20)
     print(G.node_values)
+
     for i in range(1):
         A = G.update()
         print(A)
