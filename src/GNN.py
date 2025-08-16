@@ -29,7 +29,15 @@ class GNN(Graph):
     def __repr__(self):
         return super().__repr__()
 
-G = GNN(node_values=[(1,), (1,), (1,), (1,), (1,), (1,), (1,)], directed=True)
+def partition(colour_array):
+    colours = {i: [] for i in range(len(colour_array))}
+    for index1, colour1 in enumerate(colour_array):
+        for index2, colour2 in enumerate(colour_array):
+            if colour1 == colour2:
+                colours[index1].append(index2)
+    return colours
+
+G = GNN(node_values=[(1,), (1,), (1,), (1,), (1,), (1,), (1,)], directed=False)
 
 G.add_edge(0, 1)
 G.add_edge(0, 2)
@@ -43,29 +51,30 @@ if __name__ == "__main__":
     print(G)
     print("=" * 20)
     print(G.node_values)
-
-    for i in range(1):
+    
+    prev_partition = {}
+    same_partiton = False
+    i = 0
+    while not same_partiton:
+        print(f"Iteration {i}")
         A = G.update()
         print(A)
-    print("=" * 20)
-    
-    color_map = []
-    for node in G.node_values:
-        if node == 1:
-            color_map.append('blue')
-        elif node == 2:
-            color_map.append('green')
-        elif node == 3:
-            color_map.append('red')
+        colours = partition(A)
+        i += 1
+        if colours == prev_partition:
+            print(f"Colours successfully refined after {i} iterations.")
+            same_partiton = True
         else:
-            color_map.append('gray')
+            prev_partition = colours
+    print("=" * 20)
+
     
     label_dict = {}
     
     for i in range(len(G.node_values)):
         label_dict[i] = G.node_values[i]
     
-    nx.draw(G.g_disp, node_color=color_map, labels=label_dict, with_labels=True, font_weight='bold')
+    nx.draw(G.g_disp, labels=label_dict, with_labels=True, font_weight='bold')
 
     plt.show()
             
