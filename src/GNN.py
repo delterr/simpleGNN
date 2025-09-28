@@ -2,6 +2,7 @@ from graph import Graph
 
 import networkx as nx
 import matplotlib.pyplot as plt
+from collections import Counter
 
 class GNN(Graph):
     def __init__(self, node_values, directed=False):
@@ -66,6 +67,8 @@ if __name__ == "__main__":
             same_partiton = True
         else:
             prev_partition = colours
+    colour_count = Counter(A)
+    print(colour_count)
     print("=" * 20)
 
     
