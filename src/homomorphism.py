@@ -1,4 +1,3 @@
-from graph import Graph
 from tree import Node
 from GNN import GNN, partition
 from collections import Counter
