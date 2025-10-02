@@ -1,12 +1,8 @@
 from graph import Graph
 
-import networkx as nx
-import matplotlib.pyplot as plt
-from collections import Counter
-
 class GNN(Graph):
-    def __init__(self, node_values, directed=False):
-        super().__init__(node_values, directed)
+    def __init__(self, edges, directed=False):
+        super().__init__(edges, directed)
         self.target_nodes = [node for node in range(self.num_nodes)] # Node IDs e.g [0 1 2 3 4 ...]
         
     def add_edge(self, u, v):
@@ -15,8 +11,8 @@ class GNN(Graph):
     def remove_edge(self, u, v):
         super().remove_edge(u, v)
     
-    def transform(self, node):
-        pass
+    def unpack_edges(self, edges):
+        super().unpack_edges(edges)
     
     def update(self):
         temp_node_values = self.node_values[:] # make a copy
@@ -37,47 +33,4 @@ def partition(colour_array):
             if colour1 == colour2:
                 colours[index1].append(index2)
     return colours
-
-G = GNN(node_values=[(1,), (1,), (1,), (1,), (1,), (1,), (1,)], directed=False)
-
-G.add_edge(0, 1)
-G.add_edge(0, 2)
-G.add_edge(2, 3)
-G.add_edge(2, 4)
-G.add_edge(1, 5)
-G.add_edge(1, 6)
-
-
-if __name__ == "__main__":
-    print(G)
-    print("=" * 20)
-    print(G.node_values)
-    
-    prev_partition = {}
-    same_partiton = False
-    i = 0
-    while not same_partiton:
-        print(f"Iteration {i}")
-        A = G.update()
-        print(A)
-        colours = partition(A)
-        i += 1
-        if colours == prev_partition:
-            print(f"Colours successfully refined after {i} iterations.")
-            same_partiton = True
-        else:
-            prev_partition = colours
-    colour_count = Counter(A)
-    print(colour_count)
-    print("=" * 20)
-
-    
-    label_dict = {}
-    
-    for i in range(len(G.node_values)):
-        label_dict[i] = G.node_values[i]
-    
-    nx.draw(G.g_disp, labels=label_dict, with_labels=True, font_weight='bold')
-
-    plt.show()
             

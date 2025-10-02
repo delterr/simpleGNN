@@ -12,19 +12,14 @@ petersen_edges = [
         (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
 ]
 
-def unpack_edges(G, edges):
-    for edge in edges:
-        G.add_edge(*edge)
-
 def case1():
     """
     Example 1
     """
-    G = GNN(node_values=[(1,), (1,), (1,)], directed=False)
-
     edges = [(0, 1), (0, 2)]
 
-    unpack_edges(G, edges)
+    G = GNN(edges=edges, directed=False)
+
 
     A = Node("A")
     B = Node("B")
@@ -37,11 +32,10 @@ def case2():
     """
     Example 2
     """
-    G = GNN(node_values=[(1,), (1,), (1,), (1,)], directed=False)
 
     edges = [(0, 1), (0, 2), (2, 3), (3, 1), (3, 0), (2, 1)]
 
-    unpack_edges(G, edges)
+    G = GNN(edges=edges, directed=False)
 
     A = Node("A")
     B = Node("B")
@@ -55,11 +49,10 @@ def case3():
     """
     Example 3
     """
-    G = GNN(node_values=[(1,), (1,), (1,), (1,)], directed=False)
 
     edges = [(0, 1), (0, 2), (2, 3), (3, 1)]
 
-    unpack_edges(G, edges)
+    G = GNN(edges=edges, directed=False)
 
     A = Node("A")
     B = Node("B")
@@ -72,12 +65,7 @@ def case4():
     """
     Example 5
     """
-    G = GNN(node_values=[(1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,)], directed=False)
-
-    edges = petersen_edges
-    
-    unpack_edges(G, edges)
-    
+    G = GNN(edges=petersen_edges, directed=False)    
 
     A = Node("A")
     B = Node("B")
@@ -90,11 +78,9 @@ def case5():
     """
     Example 5
     """
-    G = GNN(node_values=[(1,), (1,), (1,)], directed=False)
-
     edges = [(0, 1), (0, 2)]
 
-    unpack_edges(G, edges)
+    G = GNN(edges=edges, directed=False)
 
     A = Node("A")
     B = Node("B")
@@ -108,11 +94,10 @@ def case6():
     """
     Example 6
     """
-    G = GNN(node_values=[(1,), (1,), (1,), (1,)], directed=False)
 
     edges = [(0, 1), (0, 2), (2, 3), (3, 1), (0, 3), (1, 2)]
 
-    unpack_edges(G, edges)
+    G = GNN(edges=edges, directed=False)
 
     A = Node("A")
     B = Node("B")
@@ -126,11 +111,9 @@ def case7():
     """
     Example 7
     """
-    G = GNN(node_values=[(1,), (1,), (1,), (1,)], directed=False)
-
     edges = [(0, 1), (0, 2), (2, 3), (3, 1)]
 
-    unpack_edges(G, edges)
+    G = GNN(edges=edges, directed=False)
 
     A = Node("A")
     B = Node("B")
@@ -144,11 +127,7 @@ def case8():
     """
     Example 8
     """
-    G = GNN(node_values=[(1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,)], directed=False)
-
-    edges = petersen_edges
-    
-    unpack_edges(G, edges)
+    G = GNN(edges=petersen_edges, directed=False)
 
     A = Node("A")
     B = Node("B")
@@ -158,8 +137,6 @@ def case8():
 
     return G, A
 
-
-
 if __name__ == "__main__":
 
     T = Node("A")
@@ -168,7 +145,6 @@ if __name__ == "__main__":
 
     fig, axes = plt.subplots(4, 2, figsize=(10, 10))
     axes = axes.flatten()
-
 
     for index, func in enumerate(case_functions):
         colors = [
@@ -211,8 +187,6 @@ if __name__ == "__main__":
         print(color_map)
     
     # nx.draw(G.g_disp, labels=label_dict, node_color=color_map, with_labels=True, font_weight='bold') drawes labels and colours
-
-
 
     plt.show()
 
