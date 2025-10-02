@@ -6,6 +6,12 @@ from homomorphism import total_hom
 import networkx as nx
 
 
+petersen_edges = [
+        (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
+        (5, 6), (6, 7), (7, 8), (8, 9), (9, 5),
+        (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
+]
+
 def unpack_edges(G, edges):
     for edge in edges:
         G.add_edge(*edge)
@@ -68,11 +74,7 @@ def case4():
     """
     G = GNN(node_values=[(1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,)], directed=False)
 
-    edges = [
-        (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
-        (5, 6), (6, 7), (7, 8), (8, 9), (9, 5),
-        (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
-    ]
+    edges = petersen_edges
     
     unpack_edges(G, edges)
     
@@ -144,11 +146,7 @@ def case8():
     """
     G = GNN(node_values=[(1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,), (1,)], directed=False)
 
-    edges = [
-        (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
-        (5, 6), (6, 7), (7, 8), (8, 9), (9, 5),
-        (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
-    ]
+    edges = petersen_edges
     
     unpack_edges(G, edges)
 
