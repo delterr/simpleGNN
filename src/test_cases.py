@@ -5,14 +5,20 @@ from matplotlib import colors
 from homomorphism import total_hom
 import networkx as nx
 
+
+def unpack_edges(G, edges):
+    for edge in edges:
+        G.add_edge(*edge)
+
 def case1():
     """
     Example 1
     """
     G = GNN(node_values=[(1,), (1,), (1,)], directed=False)
 
-    G.add_edge(0, 1)
-    G.add_edge(0, 2)
+    edges = [(0, 1), (0, 2)]
+
+    unpack_edges(G, edges)
 
     A = Node("A")
     B = Node("B")
@@ -27,13 +33,9 @@ def case2():
     """
     G = GNN(node_values=[(1,), (1,), (1,), (1,)], directed=False)
 
-    G.add_edge(0, 1)
-    G.add_edge(0, 2)
-    G.add_edge(2, 3)
-    G.add_edge(3, 1)
-    G.add_edge(3, 0)
-    G.add_edge(2, 1)
+    edges = [(0, 1), (0, 2), (2, 3), (3, 1), (3, 0), (2, 1)]
 
+    unpack_edges(G, edges)
 
     A = Node("A")
     B = Node("B")
@@ -49,10 +51,9 @@ def case3():
     """
     G = GNN(node_values=[(1,), (1,), (1,), (1,)], directed=False)
 
-    G.add_edge(0, 1)
-    G.add_edge(0, 2)
-    G.add_edge(2, 3)
-    G.add_edge(3, 1)
+    edges = [(0, 1), (0, 2), (2, 3), (3, 1)]
+
+    unpack_edges(G, edges)
 
     A = Node("A")
     B = Node("B")
@@ -73,8 +74,7 @@ def case4():
         (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
     ]
     
-    for edge in edges:
-        G.add_edge(*edge)
+    unpack_edges(G, edges)
     
 
     A = Node("A")
@@ -90,8 +90,9 @@ def case5():
     """
     G = GNN(node_values=[(1,), (1,), (1,)], directed=False)
 
-    G.add_edge(0, 1)
-    G.add_edge(0, 2)
+    edges = [(0, 1), (0, 2)]
+
+    unpack_edges(G, edges)
 
     A = Node("A")
     B = Node("B")
@@ -107,12 +108,9 @@ def case6():
     """
     G = GNN(node_values=[(1,), (1,), (1,), (1,)], directed=False)
 
-    G.add_edge(0, 1)
-    G.add_edge(0, 2)
-    G.add_edge(2, 3)
-    G.add_edge(3, 1)
-    G.add_edge(0, 3)
-    G.add_edge(1, 2)
+    edges = [(0, 1), (0, 2), (2, 3), (3, 1), (0, 3), (1, 2)]
+
+    unpack_edges(G, edges)
 
     A = Node("A")
     B = Node("B")
@@ -128,10 +126,9 @@ def case7():
     """
     G = GNN(node_values=[(1,), (1,), (1,), (1,)], directed=False)
 
-    G.add_edge(0, 1)
-    G.add_edge(0, 2)
-    G.add_edge(2, 3)
-    G.add_edge(3, 1)
+    edges = [(0, 1), (0, 2), (2, 3), (3, 1)]
+
+    unpack_edges(G, edges)
 
     A = Node("A")
     B = Node("B")
@@ -153,9 +150,7 @@ def case8():
         (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
     ]
     
-    for edge in edges:
-        G.add_edge(*edge)
-    
+    unpack_edges(G, edges)
 
     A = Node("A")
     B = Node("B")
