@@ -1,8 +1,5 @@
-from tree import Node
-from GNN import GNN, partition
+from GNN import partition
 from collections import Counter
-import matplotlib.pyplot as plt
-import networkx as nx
 
 def hom(T, G, x):
     """
@@ -51,35 +48,3 @@ def total_hom(T, G):
         result += value * hom(T, G, node)
     
     return result
-
-def create_tree():
-    A = Node("A")
-    B = Node("B")
-
-    A.children = [B]
-    
-    return A
-
-def create_graph():
-    G = GNN(node_values=[(1,), (1,), (1,)], directed=False)
-
-    G.add_edge(0, 1)
-    G.add_edge(0, 2)
-
-    return G
-
-if __name__ == "__main__":
-    T = Node("A")
-    T.children = [Node("B")]
-    G = create_graph()
-
-    label_dict = {}
-
-    print(total_hom(T, G))
-
-    for i in range(len(G.node_values)):
-        label_dict[i] = G.node_values[i]
-    
-    nx.draw(G.g_disp, labels=label_dict, with_labels=True, font_weight='bold')
-
-    plt.show()

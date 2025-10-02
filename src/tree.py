@@ -2,7 +2,6 @@ class Node:
     def __init__(self, val):
         self.value = val
         self.children = []
-    
         
     def __repr__(self):
         return f"Node({self.value})"
