@@ -8,6 +8,7 @@ class Graph:
         self.node_values = [(1,) for i in range(self.num_nodes)]
         self.directed = directed
         self.adj_matrix = [[0] * self.num_nodes for _ in range(self.num_nodes)]
+        self.adj_list = {node: [] for node in range(self.num_nodes)}
         self.setup_display()
         self.unpack_edges(edges)
 
@@ -17,11 +18,15 @@ class Graph:
         else:
             self.adj_matrix[u][v] = 1
         self.adj_matrix[v][u] = 1
+        self.adj_list[u].append(v)
+        self.adj_list[v].append(u)
         self.g_disp.add_edge(u, v)
     
     def remove_edge(self, u, v):
         self.adj_matrix[u][v] = 0
         self.adj_matrix[v][u] = 0
+        self.adj_list[u].remove(v)
+        self.adj_list[v].remove(u)
     
     def unpack_edges(self, edges):
         for edge in edges:
@@ -47,16 +52,8 @@ class Graph:
     
     def __repr__(self):
         final_string = ""
-        row_string = "   " + " ".join([str(i) for i in range(self.num_nodes)])
-        print(row_string)
-        print("=" * len(row_string))
+        for i in self.adj_list:
+            final_string += f"{i}: {self.adj_list[i]}\n"
         
-        for i, row in enumerate(self.adj_matrix):
-            final_string += str(i) + "| "
-            for k in row:
-                final_string += str(k) + " "
-            
-            if i != len(self.adj_matrix) - 1:
-                final_string += "\n"
-                
         return final_string
+
