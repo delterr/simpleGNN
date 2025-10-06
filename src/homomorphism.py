@@ -17,7 +17,7 @@ def hom(T, G, x):
         temp = 0
         
         for y in range(G.num_nodes):
-            if G.adj_matrix[x][y] == 1:
+            if y in G.adj_list.get(x): # get key and check if key exists?
                 temp += hom(T_prime, G, y)
         result = result * temp
     return result

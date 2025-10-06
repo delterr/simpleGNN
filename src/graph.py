@@ -1,5 +1,11 @@
 import networkx as nx
 
+petersen_edges = [
+        (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
+        (5, 6), (6, 7), (7, 8), (8, 9), (9, 5),
+        (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
+]
+
 class Graph:
     def __init__(self, edges, directed=False):
         self.seen_nodes = []
@@ -17,9 +23,9 @@ class Graph:
             self.adj_matrix[u][v] = "X"
         else:
             self.adj_matrix[u][v] = 1
+            self.adj_list[v].append(u)
         self.adj_matrix[v][u] = 1
         self.adj_list[u].append(v)
-        self.adj_list[v].append(u)
         self.g_disp.add_edge(u, v)
     
     def remove_edge(self, u, v):
@@ -56,4 +62,7 @@ class Graph:
             final_string += f"{i}: {self.adj_list[i]}\n"
         
         return final_string
+
+G = Graph(edges=petersen_edges, directed=False)
+print(G)
 
