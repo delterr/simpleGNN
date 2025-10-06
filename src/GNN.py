@@ -21,13 +21,6 @@ class GNN(Graph):
             for j in self.adj_list[i]:
                 self.node_values[i] = self.node_values[i] + temp_node_values[j]
         
-        """
-
-        for i, row in enumerate(self.adj_matrix):
-            for j, val in enumerate(row):
-                if val == 1:
-                    self.node_values[i] = self.node_values[i] + temp_node_values[j]
-        """
         self.node_values = [hash(i) for i in self.node_values]  # Hashing the node values
         return self.node_values
 
