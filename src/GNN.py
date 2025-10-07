@@ -42,4 +42,3 @@ def partition(colour_array):
             if colour1 == colour2:
                 colours[index1].append(index2)
     return colours
-            

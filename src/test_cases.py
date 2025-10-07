@@ -189,4 +189,3 @@ if __name__ == "__main__":
     # nx.draw(G.g_disp, labels=label_dict, node_color=color_map, with_labels=True, font_weight='bold') drawes labels and colours
 
     plt.show()
-

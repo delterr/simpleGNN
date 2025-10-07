@@ -13,24 +13,17 @@ class Graph:
         self.num_nodes = len(self.seen_nodes)
         self.node_values = [(1,) for i in range(self.num_nodes)]
         self.directed = directed
-        self.adj_matrix = [[0] * self.num_nodes for _ in range(self.num_nodes)]
         self.adj_list = {node: [] for node in range(self.num_nodes)}
         self.setup_display()
         self.unpack_edges(edges)
 
     def add_edge(self, u, v):
-        if self.directed:
-            self.adj_matrix[u][v] = "X"
-        else:
-            self.adj_matrix[u][v] = 1
+        if not self.directed:
             self.adj_list[v].append(u)
-        self.adj_matrix[v][u] = 1
         self.adj_list[u].append(v)
         self.g_disp.add_edge(u, v)
     
     def remove_edge(self, u, v):
-        self.adj_matrix[u][v] = 0
-        self.adj_matrix[v][u] = 0
         self.adj_list[u].remove(v)
         self.adj_list[v].remove(u)
     
@@ -43,11 +36,6 @@ class Graph:
             self.g_disp = nx.DiGraph()
         else:
             self.g_disp = nx.Graph()
-        
-        for i in range(self.num_nodes):
-            for j in range(self.num_nodes):
-                if i == j:
-                    self.adj_matrix[i][j] = "X"
     
     def transform_edges(self, edges):
         for edge in edges:
@@ -62,7 +50,3 @@ class Graph:
             final_string += f"{i}: {self.adj_list[i]}\n"
         
         return final_string
-
-G = Graph(edges=petersen_edges, directed=False)
-print(G)
-
