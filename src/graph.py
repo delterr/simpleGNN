@@ -1,5 +1,11 @@
 import networkx as nx
 
+petersen_edges = [
+        (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
+        (5, 6), (6, 7), (7, 8), (8, 9), (9, 5),
+        (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
+]
+
 class Graph:
     def __init__(self, edges, directed=False):
         self.seen_nodes = []
@@ -7,21 +13,19 @@ class Graph:
         self.num_nodes = len(self.seen_nodes)
         self.node_values = [(1,) for i in range(self.num_nodes)]
         self.directed = directed
-        self.adj_matrix = [[0] * self.num_nodes for _ in range(self.num_nodes)]
+        self.adj_list = {node: [] for node in range(self.num_nodes)}
         self.setup_display()
         self.unpack_edges(edges)
 
     def add_edge(self, u, v):
-        if self.directed:
-            self.adj_matrix[u][v] = "X"
-        else:
-            self.adj_matrix[u][v] = 1
-        self.adj_matrix[v][u] = 1
+        if not self.directed:
+            self.adj_list[v].append(u)
+        self.adj_list[u].append(v)
         self.g_disp.add_edge(u, v)
     
     def remove_edge(self, u, v):
-        self.adj_matrix[u][v] = 0
-        self.adj_matrix[v][u] = 0
+        self.adj_list[u].remove(v)
+        self.adj_list[v].remove(u)
     
     def unpack_edges(self, edges):
         for edge in edges:
@@ -32,11 +36,6 @@ class Graph:
             self.g_disp = nx.DiGraph()
         else:
             self.g_disp = nx.Graph()
-        
-        for i in range(self.num_nodes):
-            for j in range(self.num_nodes):
-                if i == j:
-                    self.adj_matrix[i][j] = "X"
     
     def transform_edges(self, edges):
         for edge in edges:
@@ -47,16 +46,7 @@ class Graph:
     
     def __repr__(self):
         final_string = ""
-        row_string = "   " + " ".join([str(i) for i in range(self.num_nodes)])
-        print(row_string)
-        print("=" * len(row_string))
+        for i in self.adj_list:
+            final_string += f"{i}: {self.adj_list[i]}\n"
         
-        for i, row in enumerate(self.adj_matrix):
-            final_string += str(i) + "| "
-            for k in row:
-                final_string += str(k) + " "
-            
-            if i != len(self.adj_matrix) - 1:
-                final_string += "\n"
-                
         return final_string

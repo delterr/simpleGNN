@@ -16,11 +16,20 @@ class GNN(Graph):
     
     def update(self):
         temp_node_values = self.node_values[:] # make a copy
-        for i, row in enumerate(self.adj_matrix):
-            for j, val in enumerate(row):
-                if val == 1:
-                    self.node_values[i] = self.node_values[i] + temp_node_values[j]
+
+        for i in self.adj_list:
+            for j in self.adj_list[i]:
+                self.node_values[i] = self.node_values[i] + temp_node_values[j]
+        
         self.node_values = [hash(i) for i in self.node_values]  # Hashing the node values
+        return self.node_values
+
+    def update_list(self):
+        temp_node_values = self.node_values[:]
+        for i in self.adj_list:
+            for j in self.adj_list[i]:
+                self.node_values[i] = self.node_values[i] + temp_node_values[j]
+        self.node_values = [hash(i) for i in self.node_values]
         return self.node_values
             
     def __repr__(self):
@@ -33,4 +42,3 @@ def partition(colour_array):
             if colour1 == colour2:
                 colours[index1].append(index2)
     return colours
-            

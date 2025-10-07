@@ -18,5 +18,3 @@ if __name__ == "__main__":
     A.children = [B, C]
     B.children = [D, E]
     C.children = [F, G]
-
-
