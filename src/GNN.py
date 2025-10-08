@@ -3,8 +3,7 @@ from graph import Graph
 class GNN(Graph):
     def __init__(self, edges, directed=False):
         super().__init__(edges, directed)
-        self.target_nodes = [node for node in range(self.num_nodes)] # Node IDs e.g [0 1 2 3 4 ...]
-        
+
     def add_edge(self, u, v):
         super().add_edge(u, v)
     
