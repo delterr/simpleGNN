@@ -143,49 +143,11 @@ if __name__ == "__main__":
     T.children = [Node("B")]
     case_functions = [case1, case2, case3, case4, case5, case6, case7, case8]
 
-    fig, axes = plt.subplots(4, 2, figsize=(10, 10))
-    axes = axes.flatten()
+    G, A = case8()
+    homs = total_hom(A, G)
 
-    for index, func in enumerate(case_functions):
-        colors = [
-            "black",
-            "red",
-            "blue",
-            "green",
-            "orange",
-            "purple",
-            "brown",
-            "pink",
-            "gray",
-            "cyan",
-        ]
+    print(homs)
 
-        G, A = func()
-        homs = total_hom(A, G)
-        print(f"Total homomorphisms for {func.__name__}: {homs}")
-
-        color_map = []
-        label_dict = {}
-        colors_dict = {}
-
-        print(homs)
-        print(G.node_values)
-        for i in range(len(G.node_values)):
-            label_dict[i] = G.node_values[i]
-            current_hash = G.node_values[i]
-
-            if current_hash not in colors_dict:
-                colors_dict[current_hash] = colors.pop(0)
-        
-        for node in G.node_values:
-            color_map.append(colors_dict[node])
-        
-        nx.draw(G.g_disp, ax=axes[index], node_color=color_map)
-        axes[index].set_title(f"Graph {index+1} \n #Homomorphisms: {homs}")
-
-        print(colors_dict)
-        print(color_map)
-    
     # nx.draw(G.g_disp, labels=label_dict, node_color=color_map, with_labels=True, font_weight='bold') drawes labels and colours
 
     plt.show()

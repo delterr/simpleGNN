@@ -14,30 +14,22 @@ class GNN(Graph):
         super().unpack_edges(edges)
     
     def update(self):
-        temp_node_values = self.node_values[:] # make a copy
+        temp_node_values = self.node_values.copy() # make a copy
 
         for i in self.adj_list:
             for j in self.adj_list[i]:
                 self.node_values[i] = self.node_values[i] + temp_node_values[j]
         
-        self.node_values = [hash(i) for i in self.node_values]  # Hashing the node values
-        return self.node_values
-
-    def update_list(self):
-        temp_node_values = self.node_values[:]
-        for i in self.adj_list:
-            for j in self.adj_list[i]:
-                self.node_values[i] = self.node_values[i] + temp_node_values[j]
-        self.node_values = [hash(i) for i in self.node_values]
+        self.node_values = {i: hash(self.node_values[i]) for i in self.node_values}  # Hashing the node values
         return self.node_values
             
     def __repr__(self):
         return super().__repr__()
 
 def partition(colour_array):
-    colours = {i: [] for i in range(len(colour_array))}
-    for index1, colour1 in enumerate(colour_array):
-        for index2, colour2 in enumerate(colour_array):
-            if colour1 == colour2:
-                colours[index1].append(index2)
+    colours = {i: [] for i in colour_array}
+    for key1, value1 in colour_array.items():
+        for key2, value2 in colour_array.items():
+            if value1 == value2:
+                colours[key1].append(key2)
     return colours

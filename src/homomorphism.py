@@ -16,9 +16,8 @@ def hom(T, G, x):
         T_prime = u
         temp = 0
         
-        for y in range(G.num_nodes):
-            if y in G.adj_list.get(x): # get key and check if key exists?
-                temp += hom(T_prime, G, y)
+        for y in G.adj_list.get(x): # iterate through keys
+            temp += hom(T_prime, G, y)
         result = result * temp
     return result
 
@@ -31,20 +30,25 @@ def total_hom(T, G):
     i = 0
     while not same_partiton:
         A = G.update()
+        
         colours = partition(A)
         i += 1
         if colours == prev_partition:
             same_partiton = True
         else:
-            prev_partition = colours    
+            prev_partition = colours
+    
+        print(colours)
 
-    colour_count = Counter(A)
+    colour_count = Counter(A.values())
     print(colour_count)
+    print(A)
     result = 0
-    i = 0
-    for key, value in colour_count.items():
-        i += 1
-        node = A.index(key)
-        result += value * hom(T, G, node)
+
+    for key1, value1 in colour_count.items():
+        for key2, value2 in A.items():
+            if key1 == value2:
+                node = key2
+        result += value1 * hom(T, G, node)
     
     return result

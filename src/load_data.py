@@ -20,15 +20,16 @@ def create_graph(df):
     return G
 
 G = create_graph(df)
-
 A = Node("A")
 A.children = [Node("B")]
 
-
 total_homs = total_hom(A, G)
-
+print(total_homs)
 pos = nx.spring_layout(G.g_disp, k=1, iterations=100)
 
-nx.draw(G.g_disp, pos)
+# Draw the graph
+nx.draw(
+    G.g_disp, pos,
+)
 
 plt.show()

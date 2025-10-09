@@ -15,7 +15,7 @@ class Graph:
         self.adj_list = {node: [] for node in self.seen_nodes}
         self.setup_display()
         self.unpack_edges(edges)
-        self.node_values = [(1,) for i in self.seen_nodes]
+        self.node_values = {node: (1,) for node in self.seen_nodes}
 
     def add_edge(self, u, v):
         if v in self.adj_list[u]:
