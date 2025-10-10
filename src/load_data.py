@@ -21,7 +21,11 @@ def create_graph(df):
 
 G = create_graph(df)
 A = Node("A")
-A.children = [Node("B")]
+B = Node("B")
+C = Node("C")
+A.children = [B, C]
+B.children = [Node("D"), Node("E")]
+C.children = [Node("F"), Node("G")]
 
 total_homs = total_hom(A, G)
 print(total_homs)

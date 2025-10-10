@@ -38,11 +38,7 @@ def total_hom(T, G):
         else:
             prev_partition = colours
     
-        print(colours)
-
     colour_count = Counter(A.values())
-    print(colour_count)
-    print(A)
     result = 0
 
     for key1, value1 in colour_count.items():
