@@ -1,10 +1,6 @@
 from tree import Node
 from GNN import GNN
-import matplotlib.pyplot as plt
-from matplotlib import colors
 from homomorphism import total_hom
-import networkx as nx
-
 
 petersen_edges = [
         (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
@@ -149,5 +145,3 @@ if __name__ == "__main__":
     print(homs)
 
     # nx.draw(G.g_disp, labels=label_dict, node_color=color_map, with_labels=True, font_weight='bold') drawes labels and colours
-
-    plt.show()

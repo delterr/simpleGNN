@@ -1,6 +1,5 @@
 import pandas as pd
 from GNN import GNN
-from graph import Graph
 import matplotlib.pyplot as plt
 import networkx as nx
 from homomorphism import total_hom
