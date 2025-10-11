@@ -14,7 +14,7 @@ petersen_edges = [
 ]
 
 def create_graph(df):
-    edges = [(int(row[0]), int(row[1])) for index, row in df.iterrows()]
+    edges = [(row[0], row[1]) for index, row in df.iterrows()]
     G = GNN(edges=edges, directed=False)
     return G
 
