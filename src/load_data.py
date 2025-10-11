@@ -1,7 +1,7 @@
 import pandas as pd
 from GNN import GNN
-import matplotlib.pyplot as plt
-import networkx as nx
+# import matplotlib.pyplot as plt
+# import networkx as nx
 from homomorphism import total_hom
 from tree import Node
 
@@ -28,11 +28,13 @@ C.children = [Node("F"), Node("G")]
 
 total_homs = total_hom(A, G)
 print(total_homs)
-pos = nx.spring_layout(G.g_disp, k=1, iterations=100)
+# pos = nx.spring_layout(G.g_disp, k=1, iterations=100)
 
 # Draw the graph
+"""
 nx.draw(
     G.g_disp, pos,
 )
+"""
 
-plt.show()
+# plt.show()

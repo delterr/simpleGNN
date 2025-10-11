@@ -1,6 +1,8 @@
 from GNN import partition
 from collections import Counter
 
+memo = {}
+
 def hom(T, G, x):
     """
     Compute homomorphism between tree T and graph G
@@ -17,7 +19,9 @@ def hom(T, G, x):
         temp = 0
         
         for y in G.adj_list.get(x): # iterate through keys
-            temp += hom(T_prime, G, y)
+            if not memo.get(y):
+                memo[y] = hom(T_prime, G, y)
+            temp += memo[y]
         result = result * temp
     return result
 
