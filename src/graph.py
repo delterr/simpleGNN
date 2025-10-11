@@ -11,16 +11,21 @@ class Graph:
         self.seen_nodes = []
         self.transform_edges(edges)
         self.num_nodes = len(self.seen_nodes)
-        self.node_values = [(1,) for i in range(self.num_nodes)]
         self.directed = directed
-        self.adj_list = {node: [] for node in range(self.num_nodes)}
+        self.adj_list = {node: [] for node in self.seen_nodes}
         self.setup_display()
         self.unpack_edges(edges)
+        self.node_values = {node: (1,) for node in self.seen_nodes}
 
     def add_edge(self, u, v):
-        if not self.directed:
-            self.adj_list[v].append(u)
+        if v in self.adj_list[u]:
+            return "edge already exists"
+        
+        if u in self.adj_list[v]:
+            return "edge already exists"
+
         self.adj_list[u].append(v)
+        self.adj_list[v].append(u)
         self.g_disp.add_edge(u, v)
     
     def remove_edge(self, u, v):
