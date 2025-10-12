@@ -42,6 +42,8 @@ def total_hom(T, G):
         else:
             prev_partition = colours
     
+    print(f"Colours successfully refined after {i} iterations")
+    
     colour_count = Counter(A.values())
     result = 0
 
