@@ -1,11 +1,5 @@
 import networkx as nx
 
-petersen_edges = [
-        (0, 1), (1, 2), (2, 3), (3, 4), (4, 0),
-        (5, 6), (6, 7), (7, 8), (8, 9), (9, 5),
-        (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
-]
-
 class Graph:
     def __init__(self, edges, directed=False):
         self.seen_nodes = []
