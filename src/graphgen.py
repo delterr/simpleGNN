@@ -6,6 +6,7 @@ n -> n bipartite graph
 """
 
 import sys
+import pickle
 import networkx as nx
 import matplotlib.pyplot as plt
 
@@ -23,17 +24,37 @@ def generate_bipartite(n):
 
     return graph, edges
 
-degree = int(sys.argv[1])
+def arg_check(n_args, error):
+    """Check if number of arguments is correct"""
+    if len(sys.argv) != n_args:
+        raise Exception(error)
 
-try:
-    nodes = int(sys.argv[2])
-except IndexError:
-    n = degree
-    graph, edges = generate_bipartite(n)
-else:
-    graph, edges = generate_regular(degree, nodes)
+def save_graph():
+    mode = sys.argv[1]
 
-print(edges)
+    if mode == "bip":
+        nodes = int(sys.argv[2])
 
-nx.draw(graph)
-plt.show()
+        filename = f"../graphs/bipartite/bip_{nodes}.pkl"
+
+        graph, edges = generate_bipartite(nodes)
+
+
+    elif mode == "reg":
+        degree = int(sys.argv[2])
+        nodes = int(sys.argv[3])
+
+        filename = f"../graphs/regular/reg_{degree}_{nodes}.pkl"
+
+        graph, edges = generate_regular(degree, nodes)
+
+    else:
+        raise Exception(f"Invalid Mode: {mode}")
+
+
+    with open(filename, "wb") as f:
+        pickle.dump(edges, f)
+
+    print("Graph Successfully Created!")
+    
+save_graph()
