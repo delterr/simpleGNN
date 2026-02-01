@@ -138,10 +138,11 @@ if __name__ == "__main__":
     T = Node("A")
     T.children = [Node("B")]
     case_functions = [case1, case2, case3, case4, case5, case6, case7, case8]
+    
+    for func in case_functions:
+        G, A = func()
+        homs = total_hom(A, G)
 
-    G, A = case8()
-    homs = total_hom(A, G)
-
-    print(homs)
+        print(homs)
 
     # nx.draw(G.g_disp, labels=label_dict, node_color=color_map, with_labels=True, font_weight='bold') drawes labels and colours
