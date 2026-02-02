@@ -18,7 +18,7 @@ def generate_regular(degree, nodes):
     return graph, edges
 
 def generate_bipartite(n):
-    "Generates a full n -> n bipartite graph"
+    """Generates a full n -> n bipartite graph"""
     graph = nx.complete_bipartite_graph(n, n)
     edges = list(graph.edges)
 
