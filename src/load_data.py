@@ -13,6 +13,11 @@ petersen_edges = [
         (0, 5), (1, 8), (2, 6), (4, 7), (3, 9)
 ]
 
+
+for index, row in df.iterrows():
+    print(row[0])
+    break
+
 def create_graph(df):
     edges = [(int(row[0]), int(row[1])) for index, row in df.iterrows()]
     G = GNN(edges=edges, directed=False)
@@ -22,9 +27,8 @@ G = create_graph(df)
 A = Node("A")
 B = Node("B")
 C = Node("C")
-A.children = [B, C]
-B.children = [Node("D"), Node("E")]
-C.children = [Node("F"), Node("G")]
+A.children = [B]
+
 
 total_homs = total_hom(A, G)
 print(total_homs)

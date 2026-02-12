@@ -207,7 +207,6 @@ def bipartite_tests():
         with open(f"{path}/{filename}", "rb") as f:
             edges = pickle.load(f)
 
-            print(len(edges))
 
         G = GNN(edges=edges, directed=False)
         k1_homs_gnn.append(total_hom(tree1, G))
@@ -216,14 +215,27 @@ def bipartite_tests():
     comp1 = k1_homs == k1_homs_gnn
     comp2 = k2_homs == k2_homs_gnn
 
-
     return comp1, comp2
+
+def fb_test():
+    with open("edges.pkl", "rb") as f:
+        edges = pickle.load(f)
+    edges = edges[0:3]
+    print(edges)
+    G = GNN(edges=edges, directed=False)
+
+    T = Node("A")
+    T.children = [Node("B")]
+
+    return total_hom(T, G)
 
 if __name__ == "__main__":
 
     T = Node("A")
     T.children = [Node("B")]
     case_functions = [case1, case2, case3, case4, case5, case6, case7, case8]
+
+    print(fb_test())
 
     """
     for func in case_functions:
@@ -233,7 +245,7 @@ if __name__ == "__main__":
         print(homs)
     """
 
-    print(bipartite_tests()[0])
+    # print(bipartite_tests()[0])
     #print(bipartite_tests()[1])
 
     #print(k1_homs)
