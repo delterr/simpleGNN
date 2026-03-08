@@ -220,12 +220,11 @@ def bipartite_tests():
 def fb_test():
     with open("edges.pkl", "rb") as f:
         edges = pickle.load(f)
-    edges = edges[0:3]
-    print(edges)
+    
     G = GNN(edges=edges, directed=False)
 
     T = Node("A")
-    T.children = [Node("B")]
+    T.children = [Node("B"), Node("C")]
 
     return total_hom(T, G)
 
