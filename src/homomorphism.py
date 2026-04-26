@@ -33,27 +33,32 @@ def total_hom_preprocess(T, G, colour_count, A):
                 node = key2
         result += value1 * hom(T, G, node)
     
+    
     return result
 
+memo = {}
 def hom(T, G, x):
     """
     Compute homomorphism between tree T and graph G
     from a vertex v in T to a vertex x in G.
     """
-    
+
     if len(T.children) == 0:
         return 1
-    
+
     result = 1
-    
+
     for u in T.children:
         T_prime = u
         temp = 0
-        
+
         for y in G.adj_list.get(x): # iterate through keys
-            temp += hom(T_prime, G, y)
+            if not memo.get(y):
+                memo[y] = hom(T_prime, G, y)
+            temp += memo[y]
         result = result * temp
     return result
+
 
 def total_hom(T, G):
     """
