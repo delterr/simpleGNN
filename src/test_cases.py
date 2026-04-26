@@ -192,6 +192,12 @@ def regular_tests():
     
     comp1 = k1_homs == k1_homs_gnn
     comp2 = k2_homs == k2_homs_gnn
+
+    print(k1_homs)
+    print(k1_homs_gnn)\
+    
+    print(k2_homs)
+    print(k2_homs_gnn)
             
     
     return comp1, comp2
@@ -215,6 +221,9 @@ def bipartite_tests():
     comp1 = k1_homs == k1_homs_gnn
     comp2 = k2_homs == k2_homs_gnn
 
+    print(k1_homs)
+    print(k1_homs_gnn)
+
     return comp1, comp2
 
 def fb_test():
@@ -236,19 +245,19 @@ if __name__ == "__main__":
 
     print(fb_test())
 
-    """
+    
     for func in case_functions:
         G, A = func()
         homs = total_hom(A, G)
 
         print(homs)
-    """
+    
 
-    # print(bipartite_tests()[0])
-    #print(bipartite_tests()[1])
+    # print(regular_tests()[0])
+    # print(regular_tests()[1])
 
-    #print(k1_homs)
-    #print(k1_homs_gnn)
+    regular_tests()
+
 
     #print("=" * 20)
 

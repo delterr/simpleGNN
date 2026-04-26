@@ -25,38 +25,36 @@ def refine_colours(G):
     return A, colour_count
 
 def total_hom_preprocess(T, G, colour_count, A):
+    memo = {}
     result = 0
 
     for key1, value1 in colour_count.items():
         for key2, value2 in A.items():
             if key1 == value2:
                 node = key2
-        result += value1 * hom(T, G, node)
+        result += value1 * hom(T, G, node, memo)
     
     
     return result
 
-memo = {}
-def hom(T, G, x):
-    """
-    Compute homomorphism between tree T and graph G
-    from a vertex v in T to a vertex x in G.
-    """
-
-    if len(T.children) == 0:
+def hom(T, G, x, memo=None):
+    if memo is None:
+        memo = {}
+    
+    if not T.children:
         return 1
-
+    
     result = 1
-
+    
     for u in T.children:
-        T_prime = u
         temp = 0
-
-        for y in G.adj_list.get(x): # iterate through keys
-            if not memo.get(y):
-                memo[y] = hom(T_prime, G, y)
-            temp += memo[y]
-        result = result * temp
+        for y in G.adj_list.get(x, []):
+            key = (id(u), y)
+            if key not in memo:
+                memo[key] = hom(u, G, y, memo)
+            temp += memo[key]
+        result *= temp
+    
     return result
 
 
